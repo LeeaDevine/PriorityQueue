@@ -5,6 +5,8 @@ import java.util.Scanner;
 /**
  * Simple text based driver program for the PriorityQueue ADT and its different
  * implementations.
+ * 
+ * @author Lee Devine
  */
 public class QueueManager {
 
