@@ -16,14 +16,11 @@ package queuemanager;
  */
 public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
 
-    //TODO: 
-    /*
-    1. create node class -> help move between address of the linked list
-    2. implement into PriorityQueue methods head(), add(), remove(), isEmpty()
-    3. sort linked list
-    4. working version 1.0
-    5. other...
-    */
+    private Node<T> headNode;
+    
+    public SortedLinkedListPriorityQueue(){
+        headNode = null;
+    }
     
     /**
      * 
@@ -38,7 +35,7 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
 
     /**
      * 
-     * @return
+     * @return headNode data (item, priority)
      * @throws QueueUnderflowException 
      */
     @Override
@@ -46,26 +43,50 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
          if(isEmpty()){
              throw new QueueUnderflowException();
          }
+         return headNode.getData();
     }
 
     /**
-     * 
+     * remove headNode -> get nextNode in list
      * @throws QueueUnderflowException 
      */
     @Override
     public void remove() throws QueueUnderflowException {
-       
+        if(isEmpty()){
+            throw new QueueUnderflowException();
+        }
+        headNode = headNode.getNextNode();
     }
 
     /**
-     * 
-     * @return 
+     * Check if linked list is empty
+     * @return headNode has no value;
      */
     @Override
     public boolean isEmpty() {
-        
+        return headNode == null;
     }
     
-    public 
+    /**
+     * 
+     * @return string of result; 
+     */
+    @Override
+    public String toString(){
+        String result = "[";
+        
+        /**
+         * loop through nodes
+         */
+        for(Node<T> node = headNode; node != null; node = node.getNextNode()){
+            if(node != headNode){
+                result = result + ", ";
+            }
+            result = result + node.getData();
+        }
+        result = result + "]";
+        return result;
+        
+    }
     
 }
