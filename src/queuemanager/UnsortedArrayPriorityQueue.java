@@ -42,6 +42,36 @@ public class UnsortedArrayPriorityQueue<T> implements PriorityQueue<T> {
         tailIndex = -1;
     }
     
+    /**
+     * Helper Method
+     * Find the highest priority item from the array
+     * 
+     * @return headPosition
+     * @throws QueueUnderflowException 
+     */
+    private int getHighestPriorityItem() throws QueueUnderflowException{
+        
+        if(isEmpty()){
+            throw new QueueUnderflowException();
+        }
+        
+        /**
+         * loop through array and find largest priority integer
+         * set this as new highest priority.
+         */
+        int headPosition = tailIndex;
+        for(int i = tailIndex; i >= 0; i--){
+            
+        }
+        return headPosition;
+    }
+    
+    /**
+     * display head of array
+     * 
+     * @return
+     * @throws QueueUnderflowException 
+     */
     @Override
     public T head() throws QueueUnderflowException {
         if (isEmpty()) {
