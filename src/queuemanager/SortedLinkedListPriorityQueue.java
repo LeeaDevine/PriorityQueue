@@ -30,6 +30,39 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
      */
     @Override
     public void add(T item, int priority) throws QueueOverflowException {
+        
+        //create new instance of data(item, priority)
+        PriorityItem<T> newItem = new PriorityItem<>(item, priority);
+        
+        //create new instance of new node
+        Node newNode = new Node(newItem);
+        
+        if(headNode == null){
+            headNode = newNode;
+        }
+        
+        //create variables to store temp and previous nodes
+        Node temp = headNode;
+        Node previous = null;
+        
+        while(temp != null && ((PriorityItem)temp.getData()).getPriority() < priority){
+            previous = temp;
+            temp = temp.getNextNode();
+        }
+        
+        if(temp == null){
+            System.out.println("test1");
+//            previous.setNextNode(newNode);
+        } else{
+            
+            if(previous == null){
+                newNode.setNextNode(headNode);
+                headNode = newNode;
+            } else{
+                newNode.setNextNode(temp);
+                previous.setNextNode(newNode);
+            }
+        }
        
     }
 
