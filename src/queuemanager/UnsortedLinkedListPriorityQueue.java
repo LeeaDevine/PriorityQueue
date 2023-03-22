@@ -18,63 +18,83 @@ package queuemanager;
 public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
 
     /**
-     * private variable head index of queue
+     * private variables
+     *  head index of queue
+     *  size of linked list
      */
     private Node<PriorityItem<T>> head;
+    private int size;
+    
+    /**
+     * Constructor to create unsorted linked list
+     */
+    public UnsortedLinkedListPriorityQueue(){
+        head = null;
+        size = 0;
+    }
+    
     
     /**
      * Add the given item to the queue with the given priority.
      * 
      * @param item
      * @param priority
-     * @throws QueueOverflowException 
      */
     @Override
-    public void add(T item, int priority) throws QueueOverflowException {
+    public void add(T item, int priority){
         
         /**
          * create instance of item -> item, priority
          */
-        PriorityItem<T> priorityItem = new PriorityItem<>(item, priority);
+        PriorityItem<T> newItem = new PriorityItem<>(item, priority);
         /**
          * create instance of new node -> priorityItem
          */
-        Node<PriorityItem<T>> newNode = new Node<>(priorityItem);
+        Node<PriorityItem<T>> newNode = new Node<>(newItem);
         
         /**
          * Check if empty
          * head = new node
          */
-        if (isEmpty()) {
+        if (head == null) {
             head = newNode;
         } else {
             /**
-             * create currentNode for head
+             * create variables to store temp and previous
              */
-            Node<PriorityItem<T>> currentNode = head;
+            Node<PriorityItem<T>> temp = head;
+            Node<PriorityItem<T>> previous = null;
+            
             /**
-             * while loop 
+             * while loop
              */
-            while (currentNode.getNextNode() != null && 
-               currentNode.getNextNode().getData().getPriority() > priority) {
-                    currentNode = currentNode.getNextNode();
+            while (temp != null && temp.getData().getPriority() <= priority) {
+                previous = temp;
+                temp = temp.getNextNode();
             }
-                /**
-                 * check for highest priority
-                 */
-                if (currentNode.getData().getPriority() >= priority) {
-                    newNode.setNextNode(currentNode.getNextNode());
-                    currentNode.setNextNode(newNode);
-                } else {
-                    newNode.setNextNode(head);
-                    head = newNode;
-                }
-        }     
+            
+            /**
+             * check if previous node is null
+             */
+            if(previous == null){
+                newNode.setNextNode(head);
+                head = newNode;
+            } else{
+                previous.setNextNode(newNode);
+                newNode.setNextNode(temp);
+            }
+        }
+        
+        /**
+         * increment size of list
+         */
+        size++;
     }
 
     /**
+     * The highest priority item stored.
      * 
-     * @return headNode data (item, priority)
+     * @return The item with the highest priority
      * @throws QueueUnderflowException 
      */
     @Override
@@ -86,24 +106,26 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
     }
 
     /**
-     * remove headNode -> get nextNode in list
+     * Remove the highest priority item from the queue
      * @throws QueueUnderflowException 
      */
     @Override
     public void remove() throws QueueUnderflowException {
-        if(isEmpty()){
+        if(size == 0 || head == null){
             throw new QueueUnderflowException();
         }
-        head.setNextNode(head.getNextNode());
+        
+        head = head.getNextNode();
+        size--;
     }
 
     /**
      * Check if linked list is empty
-     * @return headNode has no value;
+     * @return true - if there are no items stored
      */
     @Override
     public boolean isEmpty() {
-        return head == null;
+        return size == 0;
     }
     
     /**
@@ -118,23 +140,29 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
      */
     @Override
     public String toString(){
-        String result = "[";
-        
-        /**
-         * Loop through queue
-         */
-        Node<PriorityItem<T>> currentNode = head;
-        while (currentNode != null) {
-            result += (currentNode.getData().toString());
-            currentNode = currentNode.getNextNode();
-            if (currentNode != null) {
-            result += (", ");
+        if(size == 0){
+            return "[]";
+        } else{
+            String result = null;
+            result += "[";
+          
+            Node<PriorityItem<T>> temp = head;
+          
+            /**
+            * Loop through queue
+            */
+            
+            while(temp != null){
+                result += temp.getData().toString();
+                temp = temp.getNextNode();
+                if(temp != null){
+                    result += ", ";
+                }
             }
+            
+            result = result + "]";
+            return result;
         }
-        
-        result = result + "]";
-        return result;
-        
     }
     
 }
