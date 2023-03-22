@@ -17,23 +17,123 @@ package queuemanager;
  */
 public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
 
+    /**
+     * private variable head index of queue
+     */
+    private Node<PriorityItem<T>> head;
+    
+    /**
+     * Add the given item to the queue with the given priority.
+     * 
+     * @param item
+     * @param priority
+     * @throws QueueOverflowException 
+     */
     @Override
     public void add(T item, int priority) throws QueueOverflowException {
         
+        /**
+         * create instance of item -> item, priority
+         */
+        PriorityItem<T> priorityItem = new PriorityItem<>(item, priority);
+        /**
+         * create instance of new node -> priorityItem
+         */
+        Node<PriorityItem<T>> newNode = new Node<>(priorityItem);
+        
+        /**
+         * Check if empty
+         * head = new node
+         */
+        if (isEmpty()) {
+            head = newNode;
+        } else {
+            /**
+             * create currentNode for head
+             */
+            Node<PriorityItem<T>> currentNode = head;
+            /**
+             * while loop 
+             */
+            while (currentNode.getNextNode() != null && 
+               currentNode.getNextNode().getData().getPriority() > priority) {
+                    currentNode = currentNode.getNextNode();
+            }
+                /**
+                 * check for highest priority
+                 */
+                if (currentNode.getData().getPriority() >= priority) {
+                    newNode.setNextNode(currentNode.getNextNode());
+                    currentNode.setNextNode(newNode);
+                } else {
+                    newNode.setNextNode(head);
+                    head = newNode;
+                }
+        }     
     }
 
+    /**
+     * 
+     * @return headNode data (item, priority)
+     * @throws QueueUnderflowException 
+     */
     @Override
     public T head() throws QueueUnderflowException {
-       
+         if(isEmpty()){
+             throw new QueueUnderflowException();
+         }
+         return head.getData().getItem();
     }
 
+    /**
+     * remove headNode -> get nextNode in list
+     * @throws QueueUnderflowException 
+     */
     @Override
     public void remove() throws QueueUnderflowException {
-        
+        if(isEmpty()){
+            throw new QueueUnderflowException();
+        }
+        head.setNextNode(head.getNextNode());
     }
 
+    /**
+     * Check if linked list is empty
+     * @return headNode has no value;
+     */
     @Override
     public boolean isEmpty() {
+        return head == null;
+    }
+    
+    /**
+     * A string representation of the entire queue.
+     *
+     * This should be formatted as a list, in square brackets.
+     *
+     * Each item[Person->name] should be shown as an ordered pair in parentheses together with
+     * its priority.
+     * 
+     * @return string of result; 
+     */
+    @Override
+    public String toString(){
+        String result = "[";
+        
+        /**
+         * Loop through queue
+         */
+        Node<PriorityItem<T>> currentNode = head;
+        while (currentNode != null) {
+            result += (currentNode.getData().toString());
+            currentNode = currentNode.getNextNode();
+            if (currentNode != null) {
+            result += (", ");
+            }
+        }
+        
+        result = result + "]";
+        return result;
         
     }
     
