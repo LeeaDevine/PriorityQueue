@@ -12,6 +12,49 @@ package queuemanager;
  * 
  * @author Lee Devine
  */
-public class Node {
+public class Node<T> {
+    
+    /**
+     * private variables
+     * item - data (item, priority)
+     * next node 
+     */
+    private T data;
+    private Node<T> nextNode;
+    
+    /**
+     * CONSTRUCTORS
+     */
+    public Node(T data){
+        this.data = data;
+    }
+    
+    /**
+     * GETTERS AND SETTERS
+     */
+    
+    /**
+     * 
+     * @return data currently stored in node 
+     */
+    public T getData(){
+        return data;
+    }
+    
+    /**
+     * 
+     * @return next node in linked list 
+     */
+    public Node<T> getNextNode(){
+        return nextNode;
+    }
+    
+    /**
+     * Pointer for next node in linked list
+     * @param nextNode 
+     */
+    public void setNextNode(Node<T> nextNode){
+        this.nextNode = nextNode;
+    }
     
 }
