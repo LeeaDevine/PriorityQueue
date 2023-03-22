@@ -16,13 +16,10 @@ package queuemanager;
  */
 public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
 
-    private Node<T> headNode;
-    
-    public SortedLinkedListPriorityQueue(){
-        headNode = null;
-    }
+    private Node<PriorityItem<T>> head;
     
     /**
+     * Add the given item to the queue with the given priority.
      * 
      * @param item
      * @param priority
@@ -31,39 +28,24 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
     @Override
     public void add(T item, int priority) throws QueueOverflowException {
         
-        //create new instance of data(item, priority)
-        PriorityItem<T> newItem = new PriorityItem<>(item, priority);
-        
-        //create new instance of new node
-        Node newNode = new Node(newItem);
-        
-        if(headNode == null){
-            headNode = newNode;
-        }
-        
-        //create variables to store temp and previous nodes
-        Node temp = headNode;
-        Node previous = null;
-        
-        while(temp != null && ((PriorityItem)temp.getData()).getPriority() < priority){
-            previous = temp;
-            temp = temp.getNextNode();
-        }
-        
-        if(temp == null){
-            System.out.println("test1");
-//            previous.setNextNode(newNode);
-        } else{
-            
-            if(previous == null){
-                newNode.setNextNode(headNode);
-                headNode = newNode;
-            } else{
-                newNode.setNextNode(temp);
-                previous.setNextNode(newNode);
+        PriorityItem<T> priorityItem = new PriorityItem<>(item, priority);
+        Node<PriorityItem<T>> newNode = new Node<>(priorityItem);
+        if (isEmpty()) {
+            head = newNode;
+        } else {
+            Node<PriorityItem<T>> currentNode = head;
+            while (currentNode.getNextNode() != null && 
+               currentNode.getNextNode().getData().getPriority() > priority) {
+            currentNode = currentNode.getNextNode();
             }
-        }
-       
+            if (currentNode.getData().getPriority() >= priority) {
+                newNode.setNextNode(currentNode.getNextNode());
+                currentNode.setNextNode(newNode);
+            } else {
+            newNode.setNextNode(head);
+            head = newNode;
+            }
+        }     
     }
 
     /**
@@ -76,7 +58,7 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
          if(isEmpty()){
              throw new QueueUnderflowException();
          }
-         return headNode.getData();
+         return head.getData().getItem();
     }
 
     /**
@@ -88,7 +70,7 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
         if(isEmpty()){
             throw new QueueUnderflowException();
         }
-        headNode = headNode.getNextNode();
+        head.setNextNode(head.getNextNode());
     }
 
     /**
@@ -97,10 +79,16 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
      */
     @Override
     public boolean isEmpty() {
-        return headNode == null;
+        return head == null;
     }
     
     /**
+     * A string representation of the entire queue.
+     *
+     * This should be formatted as a list, in square brackets.
+     *
+     * Each item[Person->name] should be shown as an ordered pair in parentheses together with
+     * its priority.
      * 
      * @return string of result; 
      */
@@ -109,14 +97,17 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
         String result = "[";
         
         /**
-         * loop through nodes
+         * Loop through queue
          */
-        for(Node<T> node = headNode; node != null; node = node.getNextNode()){
-            if(node != headNode){
-                result = result + ", ";
+        Node<PriorityItem<T>> currentNode = head;
+        while (currentNode != null) {
+            result += (currentNode.getData().toString());
+            currentNode = currentNode.getNextNode();
+            if (currentNode != null) {
+            result += (", ");
             }
-            result = result + node.getData();
         }
+        
         result = result + "]";
         return result;
         

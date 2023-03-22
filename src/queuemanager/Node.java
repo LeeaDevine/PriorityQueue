@@ -18,22 +18,15 @@ public class Node<T> {
      * private variables
      * item - data (item, priority)
      * next node 
-     * previous node
      */
     private T data;
     private Node<T> nextNode;
-    private Node<T> previousNode;
     
     /**
      * CONSTRUCTORS
      */
     public Node(T data){
         this.data = data;
-    }
-    
-    public Node(T data, Node<T> nextNode){
-        this.data = data;
-        this.nextNode = nextNode;
     }
     
     /**
@@ -62,22 +55,6 @@ public class Node<T> {
      */
     public void setNextNode(Node<T> nextNode){
         this.nextNode = nextNode;
-    }
-    
-    /**
-     * 
-     * @return previous node in linked list 
-     */
-    public Node<T> getPreviousNode(){
-        return previousNode;
-    }
-    
-    /**
-     * Pointer for previous node in linked list
-     * @param previousNode 
-     */
-    public void setPreviousNode(Node<T> previousNode){
-        this.previousNode = previousNode;
     }
     
 }
