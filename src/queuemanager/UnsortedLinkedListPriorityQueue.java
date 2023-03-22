@@ -20,22 +20,14 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
     /**
      * private variables
      *  head index of queue
-     *  size of linked list
      */
     private Node<PriorityItem<T>> head;
-    private int size;
-    
-    /**
-     * Constructor to create unsorted linked list
-     */
-    public UnsortedLinkedListPriorityQueue(){
-        head = null;
-        size = 0;
-    }
     
     
     /**
-     * Add the given item to the queue with the given priority.
+     * Add to the queue
+     * Unsorted -> no additional features.
+     * add node to list
      * 
      * @param item
      * @param priority
@@ -46,53 +38,37 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
         /**
          * create instance of item -> item, priority
          */
-        PriorityItem<T> newItem = new PriorityItem<>(item, priority);
+        PriorityItem<T> priorityItem = new PriorityItem<>(item, priority);
         /**
          * create instance of new node -> priorityItem
          */
-        Node<PriorityItem<T>> newNode = new Node<>(newItem);
+        Node<PriorityItem<T>> newNode = new Node<>(priorityItem);
         
         /**
          * Check if empty
          * head = new node
          */
-        if (head == null) {
+        if (isEmpty()) {
             head = newNode;
         } else {
             /**
-             * create variables to store temp and previous
+             * create currentNode = head
              */
-            Node<PriorityItem<T>> temp = head;
-            Node<PriorityItem<T>> previous = null;
-            
+            Node<PriorityItem<T>> currentNode = head;
             /**
              * while loop
              */
-            while (temp != null && temp.getData().getPriority() <= priority) {
-                previous = temp;
-                temp = temp.getNextNode();
+            while(currentNode.getNextNode() != null){
+                currentNode = currentNode.getNextNode();
             }
-            
-            /**
-             * check if previous node is null
-             */
-            if(previous == null){
-                newNode.setNextNode(head);
-                head = newNode;
-            } else{
-                previous.setNextNode(newNode);
-                newNode.setNextNode(temp);
-            }
+            currentNode.setNextNode(newNode);
         }
-        
-        /**
-         * increment size of list
-         */
-        size++;
     }
 
     /**
      * The highest priority item stored.
+     * 
+     * Uses helper method -> get highestPriorityNode value
      * 
      * @return The item with the highest priority
      * @throws QueueUnderflowException 
@@ -102,7 +78,10 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
          if(isEmpty()){
              throw new QueueUnderflowException();
          }
-         return head.getData().getItem();
+         Node<PriorityItem<T>> currenNode = head;
+         Node<PriorityItem<T>> highestPriorityNode = head;
+         
+         while()
     }
 
     /**
