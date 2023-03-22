@@ -6,6 +6,12 @@ import java.util.Scanner;
  * Simple text based driver program for the PriorityQueue ADT and its different
  * implementations.
  * 
+ * @references
+ * Buchalka, T. (2021). Complete Java Software Developer Masterclass (for Java 10). [online] Udemy. Available at: https://www.udemy.com/course/java-the-complete-java-developer-course/.
+ * Bro Code (2021). Data Structures and Algorithms Full Course 【𝙁𝙧𝙚𝙚】. YouTube. Available at: https://www.youtube.com/watch?v=CBYHwZcbD-s [Accessed 21 Jul. 2022].
+ * FreeCodeCamp (2019). Data Structures Easy to Advanced Course - Full Tutorial from a Google Engineer. [online] www.youtube.com. Available at: https://www.youtube.com/watch?v=RBSGKlAvoiM.
+ * 
+ * 
  * @author Lee Devine
  */
 public class QueueManager {
@@ -34,6 +40,9 @@ public class QueueManager {
                 System.out.println("Using a sorted array.");
                 break;
             case "ua":
+                q = new UnsortedArrayPriorityQueue<>(8);
+                System.out.println("Using an unsorted array.");
+                break; 
             case "sl":
             case "ul":
             case "h":
