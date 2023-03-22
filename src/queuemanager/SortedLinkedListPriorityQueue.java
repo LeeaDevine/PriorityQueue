@@ -16,6 +16,9 @@ package queuemanager;
  */
 public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
 
+    /**
+     * private variable head index of queue
+     */
     private Node<PriorityItem<T>> head;
     
     /**
@@ -28,23 +31,43 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
     @Override
     public void add(T item, int priority) throws QueueOverflowException {
         
+        /**
+         * create instance of item -> item, priority
+         */
         PriorityItem<T> priorityItem = new PriorityItem<>(item, priority);
+        /**
+         * create instance of new node -> priorityItem
+         */
         Node<PriorityItem<T>> newNode = new Node<>(priorityItem);
+        
+        /**
+         * Check if empty
+         * head = new node
+         */
         if (isEmpty()) {
             head = newNode;
         } else {
+            /**
+             * create currentNode for head
+             */
             Node<PriorityItem<T>> currentNode = head;
+            /**
+             * while loop 
+             */
             while (currentNode.getNextNode() != null && 
                currentNode.getNextNode().getData().getPriority() > priority) {
-            currentNode = currentNode.getNextNode();
+                    currentNode = currentNode.getNextNode();
             }
-            if (currentNode.getData().getPriority() >= priority) {
-                newNode.setNextNode(currentNode.getNextNode());
-                currentNode.setNextNode(newNode);
-            } else {
-            newNode.setNextNode(head);
-            head = newNode;
-            }
+                /**
+                 * check for highest priority
+                 */
+                if (currentNode.getData().getPriority() >= priority) {
+                    newNode.setNextNode(currentNode.getNextNode());
+                    currentNode.setNextNode(newNode);
+                } else {
+                    newNode.setNextNode(head);
+                    head = newNode;
+                }
         }     
     }
 
