@@ -68,24 +68,40 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
     /**
      * The highest priority item stored.
      * 
-     * Uses helper method -> get highestPriorityNode value
+     * Uses helper method -> get highestPriorityNode
      * 
      * @return The item with the highest priority
      * @throws QueueUnderflowException 
      */
     @Override
     public T head() throws QueueUnderflowException {
-         if(isEmpty()){
-             throw new QueueUnderflowException();
-         }
-         Node<PriorityItem<T>> currenNode = head;
-         Node<PriorityItem<T>> highestPriorityNode = head;
-         
-         while()
+        if(isEmpty()){
+            throw new QueueUnderflowException();
+        }
+        
+        /**
+         * keep track of highest priority
+         */
+        Node<PriorityItem<T>> currentNode = head;
+        Node<PriorityItem<T>> highestPriorityNode = head;
+        
+        /**
+         * while loop
+         */
+        while(currentNode != null){
+            if(currentNode.getData().getPriority() > highestPriorityNode.getData().getPriority()) {
+                highestPriorityNode = currentNode;
+            }
+            currentNode = currentNode.getNextNode();
+        }
+        return highestPriorityNode.getData().getItem();
     }
 
     /**
      * Remove the highest priority item from the queue
+     * 
+     * Uses helper method -> get highestPriorityNode
+     * 
      * @throws QueueUnderflowException 
      */
     @Override
