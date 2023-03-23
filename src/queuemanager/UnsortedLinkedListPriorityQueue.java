@@ -119,26 +119,20 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
      */
     @Override
     public String toString(){
-        if(size == 0){
-            return "[]";
-        } else{
-            String result = null;
-            result += "[";
+            String result = "[";
           
-            Node<PriorityItem<T>> temp = head;
+            Node<PriorityItem<T>> currentNode = head;
           
             /**
             * Loop through queue
             */
-            
-            while(temp != null){
-                result += temp.getData().toString();
-                temp = temp.getNextNode();
-                if(temp != null){
+            while(currentNode != null){
+                result += currentNode.getData().toString();
+                currentNode = currentNode.getNextNode();
+                if(currentNode != null){
                     result += ", ";
                 }
             }
-            
             result = result + "]";
             return result;
         }
