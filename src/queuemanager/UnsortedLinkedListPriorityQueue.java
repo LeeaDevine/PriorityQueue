@@ -106,12 +106,12 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
      */
     @Override
     public void remove() throws QueueUnderflowException {
-        if(size == 0 || head == null){
+        if(isEmpty()){
             throw new QueueUnderflowException();
         }
         
-        head = head.getNextNode();
-        size--;
+        
+        
     }
 
     /**
