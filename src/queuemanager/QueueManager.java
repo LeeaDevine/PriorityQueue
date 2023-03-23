@@ -35,7 +35,7 @@ public class QueueManager {
             case "sl":
             case "ul":
             case "h":
-                q = new HeapPriorityQueue<>();
+                q = new HeapPriorityQueue<>(8);
                 System.out.println("Using a heap.");
                 break;
             default:
