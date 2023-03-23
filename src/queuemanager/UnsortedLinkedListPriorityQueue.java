@@ -144,4 +144,17 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
         }
     }
     
+    private Node<PriorityItem<T>> findHighestPriorityNode() throws QueueUnderflowException {
+        if (isEmpty()) {
+            throw new QueueUnderflowException();
+        }
+        
+        Node<PriorityItem<T>> currentNode = head;
+        Node<PriorityItem<T>> highestPriorityNode = head;
+        
+        while(currentNode != null){
+            
+        }
+        return highestPriorityNode;
+    }
 }
