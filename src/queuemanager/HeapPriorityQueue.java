@@ -61,6 +61,17 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T>{
     @Override
     public void add(T item, int priority) throws QueueOverflowException {
         
+        tailIndex = tailIndex + 1;
+        
+        if(tailIndex >= capacity){
+            tailIndex = tailIndex -1;
+            throw new QueueOverflowException();
+        }
+        else{
+            storage[tailIndex] = new PriorityItem<>(item, priority);
+            
+            /* max heapify */
+        }
     }
 
     /**
@@ -113,4 +124,28 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T>{
         return result;
     }
     
+    /**
+     * Compare the values of two elements in the heap
+     * 
+     * @param index1
+     * @param index2
+     * @return 
+     */
+    private int compare(int index1, int index2){
+        return 
+            ((PriorityItem<T>) storage[index1]).getPriority() -
+            ((PriorityItem<T>) storage[index2]).getPriority();
+    }
+    
+    /**
+     * Swap the elements of the heap
+     * 
+     * @param index1
+     * @param index2 
+     */
+    private void swap(int index1, int index2){
+        Object temp = storage[index1];
+        storage[index1] = storage[index2];
+        storage[index2] = temp;
+    }
 }
