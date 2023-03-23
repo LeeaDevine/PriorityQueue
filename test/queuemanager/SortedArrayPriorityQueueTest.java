@@ -4,10 +4,6 @@
  */
 package queuemanager;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -16,92 +12,62 @@ import static org.junit.Assert.*;
  * @author Leead
  */
 public class SortedArrayPriorityQueueTest {
-    
-    public SortedArrayPriorityQueueTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
-    /**
-     * Test of head method, of class SortedArrayPriorityQueue.
-     */
     @Test
-    public void testHead() throws Exception {
-        System.out.println("head");
-        SortedArrayPriorityQueue instance = null;
-        Object expResult = null;
-        Object result = instance.head();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testAddAndHead() throws Exception {
+        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(5);
+        queue.add(new Person("Lee"), 3);
+        queue.add(new Person("Mary"), 1);
+        queue.add(new Person("David"), 2);
+        queue.add(new Person("Leon"), 5);
+        queue.add(new Person("Frank"), 4);
+        assertEquals("Leon", queue.head().getName());
     }
 
-    /**
-     * Test of add method, of class SortedArrayPriorityQueue.
-     */
-    @Test
-    public void testAdd() throws Exception {
-        System.out.println("add");
-        Object item = null;
-        int priority = 0;
-        SortedArrayPriorityQueue instance = null;
-        instance.add(item, priority);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of remove method, of class SortedArrayPriorityQueue.
-     */
     @Test
     public void testRemove() throws Exception {
-        System.out.println("remove");
-        SortedArrayPriorityQueue instance = null;
-        instance.remove();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(5);
+        queue.add(new Person("Lee"), 3);
+        queue.add(new Person("Mary"), 1);
+        queue.add(new Person("David"), 2);
+        queue.add(new Person("Leon"), 5);
+        queue.add(new Person("Frank"), 4);
+        queue.remove();
+        assertEquals("Leon", queue.head().getName());
     }
 
-    /**
-     * Test of isEmpty method, of class SortedArrayPriorityQueue.
-     */
     @Test
-    public void testIsEmpty() {
-        System.out.println("isEmpty");
-        SortedArrayPriorityQueue instance = null;
-        boolean expResult = false;
-        boolean result = instance.isEmpty();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testIsEmpty() throws Exception {
+        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(5);
+        assertTrue(queue.isEmpty());
+        queue.add(new Person("Lee"), 3);
+        assertFalse(queue.isEmpty());
+        queue.remove();
+        assertTrue(queue.isEmpty());
     }
 
-    /**
-     * Test of toString method, of class SortedArrayPriorityQueue.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        SortedArrayPriorityQueue instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test(expected = QueueOverflowException.class)
+    public void testAddFullQueue() throws Exception {
+        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(3);
+        queue.add(new Person("Lee"), 3);
+        queue.add(new Person("Mary"), 1);
+        queue.add(new Person("David"), 2);
+        // This should throw a QueueOverflowException
+        queue.add(new Person("Leon"), 4);
     }
-    
+
+    @Test(expected = QueueUnderflowException.class)
+    public void testHeadEmptyQueue() throws Exception {
+        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(5);
+        // This should throw a QueueUnderflowException
+        queue.head();
+    }
+
+    @Test(expected = QueueUnderflowException.class)
+    public void testRemoveEmptyQueue() throws Exception {
+        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(5);
+        // This should throw a QueueUnderflowException
+        queue.remove();
+    }
 }
+
