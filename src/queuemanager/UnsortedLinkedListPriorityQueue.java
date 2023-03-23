@@ -110,8 +110,30 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
             throw new QueueUnderflowException();
         }
         
+        /**
+         * keep track of current, previous, highest
+         */
+        Node<PriorityItem<T>> currentNode = head;
+        Node<PriorityItem<T>> previousNode = head;
+        Node<PriorityItem<T>> highestPriorityNode = head;
         
+        /**
+         * while loop
+         */
+        while(currentNode.getNextNode() != null){
+            if(currentNode.getNextNode().getData().getPriority() > highestPriorityNode.getData().getPriority()) {
+                highestPriorityNode = currentNode.getNextNode();
+                previousNode = currentNode;
+            }
+            currentNode = currentNode.getNextNode();
+        }
         
+        //remove highest priority node
+        if(previousNode == null){
+            head = highestPriorityNode.getNextNode();
+        }else{
+            previousNode.setNextNode(highestPriorityNode.getNextNode());
+        }
     }
 
     /**
@@ -152,34 +174,5 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
             result = result + "]";
             return result;
         }
-    }
-    
-    /**
-     * Check queue for highest priority
-     * 
-     * @return highestPriorityNode
-     * @throws QueueUnderflowException 
-     */
-    private Node<PriorityItem<T>> findHighestPriorityNode() throws QueueUnderflowException {
-        if (isEmpty()) {
-            throw new QueueUnderflowException();
-        }
-        /**
-         * node variables
-         * currentNode = head, highestPriority = head
-         */
-        Node<PriorityItem<T>> currentNode = head;
-        Node<PriorityItem<T>> highestPriorityNode = head;
-        
-        /**
-         * while loop
-         */
-        while(currentNode != null){
-            if(currentNode.getData().getPriority() > highestPriorityNode.getData().getPriority()) {
-                highestPriorityNode = currentNode;
-            }
-            currentNode = currentNode.getNextNode();
-        }
-        return highestPriorityNode;
     }
 }
