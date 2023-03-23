@@ -32,7 +32,7 @@ public class SortedArrayPriorityQueueTest {
 
     @Test(expected = QueueOverflowException.class)
     public void testAddOverflow() throws QueueOverflowException {
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 9; i++) {
             queue.add(new Person("Person " + i), i);
         }
     }
