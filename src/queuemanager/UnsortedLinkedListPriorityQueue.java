@@ -104,7 +104,7 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
      */
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return head == null;
     }
     
     /**
