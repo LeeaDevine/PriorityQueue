@@ -26,10 +26,9 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
      * 
      * @param item
      * @param priority
-     * @throws QueueOverflowException 
      */
     @Override
-    public void add(T item, int priority) throws QueueOverflowException {
+    public void add(T item, int priority) {
         
         /**
          * create instance of item -> item, priority
