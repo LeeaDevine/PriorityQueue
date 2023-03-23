@@ -19,7 +19,7 @@ public class SortedArrayPriorityQueueTest {
 
     @Before
     public void setUp() {
-        queue = new SortedArrayPriorityQueue<>(5);
+        queue = new SortedArrayPriorityQueue<>(8);
     }
 
     @Test
