@@ -93,7 +93,7 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
         if(isEmpty()){
             throw new QueueUnderflowException();
         }
-        head.setNextNode(head.getNextNode());
+        head = head.getNextNode();
     }
 
     /**
@@ -134,6 +134,5 @@ public class SortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
         result = result + "]";
         return result;
         
-    }
-    
+    } 
 }
