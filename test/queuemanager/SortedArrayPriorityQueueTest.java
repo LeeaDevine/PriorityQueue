@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Leead
+ * @author Lee Devine
  */
 public class SortedArrayPriorityQueueTest {
 
