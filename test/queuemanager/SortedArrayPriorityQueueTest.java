@@ -4,70 +4,79 @@
  */
 package queuemanager;
 
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Testing Class -> SortedArrayPriorityQueue
+ * 
  * @author Lee Devine
  */
 public class SortedArrayPriorityQueueTest {
 
-    @Test
-    public void testAddAndHead() throws Exception {
-        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(5);
-        queue.add(new Person("Lee"), 3);
-        queue.add(new Person("Mary"), 1);
-        queue.add(new Person("David"), 2);
-        queue.add(new Person("Leon"), 5);
-        queue.add(new Person("Frank"), 4);
-        assertEquals("Leon", queue.head().getName());
+    private SortedArrayPriorityQueue<Person> queue;
+
+    @Before
+    public void setUp() {
+        queue = new SortedArrayPriorityQueue<>(5);
     }
 
     @Test
-    public void testRemove() throws Exception {
-        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(5);
-        queue.add(new Person("Lee"), 3);
-        queue.add(new Person("Mary"), 1);
-        queue.add(new Person("David"), 2);
-        queue.add(new Person("Leon"), 5);
-        queue.add(new Person("Frank"), 4);
-        queue.remove();
-        assertEquals("Leon", queue.head().getName());
-    }
-
-    @Test
-    public void testIsEmpty() throws Exception {
-        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(5);
+    public void testAdd() throws QueueOverflowException, QueueUnderflowException {
         assertTrue(queue.isEmpty());
-        queue.add(new Person("Lee"), 3);
+        queue.add(new Person("Lee"), 5);
         assertFalse(queue.isEmpty());
-        queue.remove();
-        assertTrue(queue.isEmpty());
+        assertEquals("Lee", queue.head().getName());
     }
 
     @Test(expected = QueueOverflowException.class)
-    public void testAddFullQueue() throws Exception {
-        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(3);
-        queue.add(new Person("Lee"), 3);
-        queue.add(new Person("Mary"), 1);
-        queue.add(new Person("David"), 2);
-        // This should throw a QueueOverflowException
-        queue.add(new Person("Leon"), 4);
+    public void testAddOverflow() throws QueueOverflowException {
+        for (int i = 0; i < 6; i++) {
+            queue.add(new Person("Person " + i), i);
+        }
+    }
+
+    @Test
+    public void testHead() throws QueueOverflowException, QueueUnderflowException {
+        queue.add(new Person("Lee"), 5);
+        queue.add(new Person("Mary"), 10);
+        assertEquals("Mary", queue.head().getName());
     }
 
     @Test(expected = QueueUnderflowException.class)
-    public void testHeadEmptyQueue() throws Exception {
-        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(5);
-        // This should throw a QueueUnderflowException
+    public void testHeadUnderflow() throws QueueUnderflowException {
         queue.head();
     }
 
+    @Test
+    public void testRemove() throws QueueOverflowException, QueueUnderflowException {
+        queue.add(new Person("Lee"), 5);
+        queue.add(new Person("Mary"), 10);
+        assertFalse(queue.isEmpty());
+        queue.remove();
+        assertFalse(queue.isEmpty());
+        assertEquals("Lee", queue.head().getName());
+    }
+
     @Test(expected = QueueUnderflowException.class)
-    public void testRemoveEmptyQueue() throws Exception {
-        SortedArrayPriorityQueue<Person> queue = new SortedArrayPriorityQueue<>(5);
-        // This should throw a QueueUnderflowException
+    public void testRemoveUnderflow() throws QueueUnderflowException {
         queue.remove();
     }
+
+    @Test
+    public void testIsEmpty() {
+        assertTrue(queue.isEmpty());
+    }
+
+    @Test
+    public void testToString() throws QueueOverflowException {
+        assertEquals("[]", queue.toString());
+        queue.add(new Person("Lee"), 5);
+        assertEquals("[(Lee, 5)]", queue.toString());
+        queue.add(new Person("Mary"), 10);
+        assertEquals("[(Mary, 10), (Lee, 5)]", queue.toString());
+    }
 }
+
 
