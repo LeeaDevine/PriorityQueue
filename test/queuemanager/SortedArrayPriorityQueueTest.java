@@ -64,9 +64,17 @@ public class SortedArrayPriorityQueueTest {
         queue.remove();
     }
 
+    /**
+     * 
+     * @throws QueueOverflowException 
+     */
     @Test
-    public void testIsEmpty() {
+    public void testIsEmpty() throws QueueOverflowException {
         assertTrue(queue.isEmpty());
+        
+        queue.add(new Person("lee"), 10);
+        
+        assertFalse(queue.isEmpty());
     }
 
     @Test
