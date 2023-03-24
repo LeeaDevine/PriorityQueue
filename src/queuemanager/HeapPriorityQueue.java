@@ -55,16 +55,23 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T>{
     @Override
     public void add(T item, int priority) throws QueueOverflowException {
         
-        tailIndex = tailIndex + 1;
+        //Increment tailIndex to next available position.
+        tailIndex++;
         
+        //Check if capacity has been reached.
         if(tailIndex >= capacity){
+            //if true -> decrement tailIndex and throw exception.
             tailIndex = tailIndex -1;
             throw new QueueOverflowException();
         }
         else{
+            //if false -> insert new Priority Item at the tailIndex.
             storage[tailIndex] = new PriorityItem<>(item, priority);
             
-            /* max heapify */
+            /**
+             * Max Heapify
+             * Move the new added item to maintain max heap
+             */
             int index = tailIndex;
             int parentIndex = (index - 1) / 2;
             while(index > 0 && compare(index, parentIndex) > 0){
@@ -100,15 +107,18 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T>{
      */
     @Override
     public void remove() throws QueueUnderflowException {
+        //Check if the heap is empty
         if(isEmpty()){
             throw new QueueUnderflowException();
         }
         else{
-            /* swap root and last item */
+            // Swap root[highest priority] with last item
             swap(0, tailIndex);
+            
+            //Decrement tailIndex to remove highest priority
             tailIndex = tailIndex - 1;
             
-            /* max heapify */
+            // Max Heapify -> Move items to maintain max heap
             heapify(0);
         }
     }
@@ -178,18 +188,23 @@ public class HeapPriorityQueue<T> implements PriorityQueue<T>{
      * @param index -> The index of the root node.
      */
     private void heapify(int index){
+        
+        //Calculate left and right children
         int leftChildIndex = 2 * index + 1;
         int rightChildIndex = 2 * index + 2;
         int maxIndex = index;
         
+        //Check if left child exists and is greater than current max.
         if(leftChildIndex <= tailIndex && compare(leftChildIndex, maxIndex) > 0){
             maxIndex = leftChildIndex;
         }
         
+        //Check if right child exists and is greater than current max.
         if(rightChildIndex <= tailIndex && compare(rightChildIndex, maxIndex) > 0){
             maxIndex = rightChildIndex;
         }
         
+        //if either child is greater, swap them.
         if(maxIndex != index){
             swap(index, maxIndex);
             heapify(maxIndex);
