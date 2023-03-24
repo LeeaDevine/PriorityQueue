@@ -22,6 +22,11 @@ public class SortedArrayPriorityQueueTest {
         queue = new SortedArrayPriorityQueue<>(8);
     }
 
+    /**
+     * 
+     * @throws QueueOverflowException
+     * @throws QueueUnderflowException 
+     */
     @Test
     public void testAdd() throws QueueOverflowException, QueueUnderflowException {
         assertTrue(queue.isEmpty());
@@ -29,7 +34,27 @@ public class SortedArrayPriorityQueueTest {
         assertFalse(queue.isEmpty());
         assertEquals("Lee", queue.head().getName());
     }
+    
+    /**
+     * 
+     * @throws QueueOverflowException
+     * @throws QueueUnderflowException 
+     */
+    @Test
+    public void testAddSamePriority() throws QueueOverflowException, QueueUnderflowException {
+        queue.add(new Person("lee"), 5);
+        queue.add(new Person("mary"), 5);
+        
+        assertEquals("lee", queue.head().getName());
+        
+        queue.remove();
+        assertEquals("mary", queue.head().getName());
+    }
 
+    /**
+     * 
+     * @throws QueueOverflowException 
+     */
     @Test(expected = QueueOverflowException.class)
     public void testAddOverflow() throws QueueOverflowException {
         for (int i = 0; i < 9; i++) {
@@ -37,6 +62,11 @@ public class SortedArrayPriorityQueueTest {
         }
     }
 
+    /**
+     * 
+     * @throws QueueOverflowException
+     * @throws QueueUnderflowException 
+     */
     @Test
     public void testHead() throws QueueOverflowException, QueueUnderflowException {
         queue.add(new Person("Lee"), 5);
@@ -44,11 +74,20 @@ public class SortedArrayPriorityQueueTest {
         assertEquals("Mary", queue.head().getName());
     }
 
+    /**
+     * 
+     * @throws QueueUnderflowException 
+     */
     @Test(expected = QueueUnderflowException.class)
     public void testHeadUnderflow() throws QueueUnderflowException {
         queue.head();
     }
 
+    /**
+     * 
+     * @throws QueueOverflowException
+     * @throws QueueUnderflowException 
+     */
     @Test
     public void testRemove() throws QueueOverflowException, QueueUnderflowException {
         queue.add(new Person("Lee"), 5);
@@ -58,7 +97,30 @@ public class SortedArrayPriorityQueueTest {
         assertFalse(queue.isEmpty());
         assertEquals("Lee", queue.head().getName());
     }
+    
+    /**
+     * 
+     * @throws QueueOverflowException
+     * @throws QueueUnderflowException 
+     */
+    @Test
+    public void testRemoveAll() throws QueueOverflowException, QueueUnderflowException {
+        queue.add(new Person("Lee"), 5);
+        queue.add(new Person("Mary"), 10);
+        queue.add(new Person("David"), 12);
+        
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        
+        assertTrue(queue.isEmpty());
 
+    }
+
+    /**
+     * 
+     * @throws QueueUnderflowException 
+     */
     @Test(expected = QueueUnderflowException.class)
     public void testRemoveUnderflow() throws QueueUnderflowException {
         queue.remove();
@@ -77,6 +139,10 @@ public class SortedArrayPriorityQueueTest {
         assertFalse(queue.isEmpty());
     }
 
+    /**
+     * 
+     * @throws QueueOverflowException 
+     */
     @Test
     public void testToString() throws QueueOverflowException {
         assertEquals("[]", queue.toString());
