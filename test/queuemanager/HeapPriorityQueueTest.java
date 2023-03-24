@@ -4,10 +4,7 @@
  */
 package queuemanager;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -17,76 +14,97 @@ import static org.junit.Assert.*;
  */
 public class HeapPriorityQueueTest {
     
-    public HeapPriorityQueueTest() {
+    private HeapPriorityQueue<Person> queue;
+    
+    @Before
+    public void setUp(){
+        queue = new HeapPriorityQueue<>(8);
     }
     
-
     /**
      * Test of add method, of class HeapPriorityQueue.
+     * @throws queuemanager.QueueOverflowException
+     * @throws queuemanager.QueueUnderflowException
      */
     @Test
-    public void testAdd() throws Exception {
-        System.out.println("add");
-        Object item = null;
-        int priority = 0;
-        HeapPriorityQueue instance = null;
-        instance.add(item, priority);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testAddAndHead() throws QueueOverflowException, QueueUnderflowException {
+        Person person1 = new Person("lee");
+        Person person2 = new Person("mary");
+        Person person3 = new Person("david");
+        
+        queue.add(person1, 10);
+        assertEquals("lee", queue.head().getName());
+        
+        queue.add(person2, 8);
+        assertEquals("lee", queue.head().getName());
+        
+        queue.add(person3, 12);
+        assertEquals("david", queue.head().getName());
+    }
+    
+    /**
+     * 
+     * @throws QueueOverflowException 
+     */
+    @Test(expected = QueueOverflowException.class)
+    public void testAddOverflow() throws QueueOverflowException {
+        for (int i = 0; i < 9; i++) {
+            queue.add(new Person("Person " + i), i);
+        }
     }
 
     /**
      * Test of head method, of class HeapPriorityQueue.
+     * @throws queuemanager.QueueUnderflowException
      */
-    @Test
-    public void testHead() throws Exception {
-        System.out.println("head");
-        HeapPriorityQueue instance = null;
-        Object expResult = null;
-        Object result = instance.head();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test(expected = QueueUnderflowException.class)
+    public void testHeadException() throws QueueUnderflowException {
+        queue.head();
     }
 
     /**
      * Test of remove method, of class HeapPriorityQueue.
+     * @throws queuemanager.QueueOverflowException
+     * @throws queuemanager.QueueUnderflowException
      */
     @Test
-    public void testRemove() throws Exception {
-        System.out.println("remove");
-        HeapPriorityQueue instance = null;
-        instance.remove();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testRemove() throws QueueOverflowException, QueueUnderflowException {
+        Person person1 = new Person("lee");
+        Person person2 = new Person("mary");
+        Person person3 = new Person("david");
+        
+        queue.add(person1, 10);
+        queue.add(person2, 8);
+        queue.add(person3, 12);
+        
+        queue.remove();
+        assertEquals("lee", queue.head().getName());
+        
+        queue.remove();
+        assertEquals("mary", queue.head().getName());
+        
+    }
+    
+    /**
+     * Test of remove method, of class HeapPriorityQueue.
+     * @throws queuemanager.QueueUnderflowException
+     */
+    @Test(expected = QueueUnderflowException.class)
+    public void testRemoveException() throws QueueUnderflowException {
+        queue.remove();
     }
 
     /**
      * Test of isEmpty method, of class HeapPriorityQueue.
+     * @throws queuemanager.QueueOverflowException
      */
     @Test
-    public void testIsEmpty() {
-        System.out.println("isEmpty");
-        HeapPriorityQueue instance = null;
-        boolean expResult = false;
-        boolean result = instance.isEmpty();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of toString method, of class HeapPriorityQueue.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        HeapPriorityQueue instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testIsEmpty() throws QueueOverflowException{
+        assertTrue(queue.isEmpty());
+        
+        queue.add(new Person("lee"), 10);
+        
+        assertFalse(queue.isEmpty());
     }
     
 }
