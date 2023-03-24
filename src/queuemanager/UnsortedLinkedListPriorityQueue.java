@@ -114,25 +114,27 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
          * keep track of current, previous, highest
          */
         Node<PriorityItem<T>> currentNode = head;
-        Node<PriorityItem<T>> previousNode = head;
+        Node<PriorityItem<T>> previousNode = null;
         Node<PriorityItem<T>> highestPriorityNode = head;
+        Node<PriorityItem<T>> previousHighestPriorityNode = null;
         
         /**
          * while loop
          */
-        while(currentNode.getNextNode() != null){
-            if(currentNode.getNextNode().getData().getPriority() > highestPriorityNode.getData().getPriority()) {
-                highestPriorityNode = currentNode.getNextNode();
-                previousNode = currentNode;
+        while(currentNode != null){
+            if(currentNode.getData().getPriority() > highestPriorityNode.getData().getPriority()) {
+                highestPriorityNode = currentNode;
+                previousHighestPriorityNode = previousNode;
             }
+            previousNode = currentNode;
             currentNode = currentNode.getNextNode();
         }
         
         //remove highest priority node
-        if(previousNode == null){
+        if(previousHighestPriorityNode == null){
             head = highestPriorityNode.getNextNode();
         }else{
-            previousNode.setNextNode(highestPriorityNode.getNextNode());
+            previousHighestPriorityNode.setNextNode(highestPriorityNode.getNextNode());
         }
     }
 
