@@ -44,6 +44,22 @@ public class UnsortedArrayPriorityQueueTest {
         queue.add(person2, 5);
         assertEquals(person2, queue.head()); 
     }
+    
+        /**
+     * 
+     * @throws QueueOverflowException
+     * @throws QueueUnderflowException 
+     */
+    @Test
+    public void testAddSamePriority() throws QueueOverflowException, QueueUnderflowException {
+        queue.add(new Person("lee"), 5);
+        queue.add(new Person("mary"), 5);
+        
+        assertEquals("lee", queue.head().getName());
+        
+        queue.remove();
+        assertEquals("mary", queue.head().getName());
+    }
 
     /**
      * Test of add method, of class UnsortedArrayPriorityQueue.
@@ -71,6 +87,25 @@ public class UnsortedArrayPriorityQueueTest {
         
         queue.remove();
         assertEquals(person1, queue.head());   
+    }
+    
+        /**
+     * 
+     * @throws QueueOverflowException
+     * @throws QueueUnderflowException 
+     */
+    @Test
+    public void testRemoveAll() throws QueueOverflowException, QueueUnderflowException {
+        queue.add(new Person("Lee"), 5);
+        queue.add(new Person("Mary"), 10);
+        queue.add(new Person("David"), 12);
+        
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        
+        assertTrue(queue.isEmpty());
+
     }
     
     @Test(expected = QueueUnderflowException.class)
