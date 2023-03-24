@@ -30,70 +30,112 @@ public class SortedLinkedListPriorityQueueTest {
 
     /**
      * Test of add method, of class SortedLinkedListPriorityQueue.
+     * 
+     * list is sorted -> so when last item is added (david, 12) - 
+     * that item will be head() of the list because it is highest priority.
      */
     @Test
     public void testAdd() {
-        System.out.println("add");
-        Object item = null;
-        int priority = 0;
-        SortedLinkedListPriorityQueue instance = new SortedLinkedListPriorityQueue();
-        instance.add(item, priority);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+            Person person1 = new Person("lee");
+            Person person2 = new Person("mary");
+            Person person3 = new Person("david");
+            
+            queue.add(person1, 10);
+            queue.add(person2, 8);
+            queue.add(person3, 12);
+            
+            try{
+                assertEquals("david", queue.head().getName());
+            } catch(QueueUnderflowException e){
+                fail("Failed Test: " + e);
+            }   
     }
 
     /**
      * Test of head method, of class SortedLinkedListPriorityQueue.
      */
     @Test
-    public void testHead() throws Exception {
-        System.out.println("head");
-        SortedLinkedListPriorityQueue instance = new SortedLinkedListPriorityQueue();
-        Object expResult = null;
-        Object result = instance.head();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testHead() {
+        Person person1 = new Person("lee");
+        Person person2 = new Person("mary");
+
+        queue.add(person1, 10);
+        queue.add(person2, 8);
+
+        try{
+            assertEquals("lee", queue.head().getName());
+        } catch(QueueUnderflowException e){
+            fail("Failed Test: " + e);
+        }   
+    }
+
+    /**
+     * Test of head() method, of class SortedLinkedListPriorityQueue.
+     * Check for Exceptions
+     * @throws queuemanager.QueueUnderflowException
+     */
+    @Test(expected = QueueUnderflowException.class)
+    public void testHeadException() throws QueueUnderflowException {
+       queue.head();
     }
 
     /**
      * Test of remove method, of class SortedLinkedListPriorityQueue.
      */
     @Test
-    public void testRemove() throws Exception {
-        System.out.println("remove");
-        SortedLinkedListPriorityQueue instance = new SortedLinkedListPriorityQueue();
-        instance.remove();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    public void testRemove() {
+        Person person1 = new Person("lee");
+        Person person2 = new Person("mary");
 
+        queue.add(person1, 10);
+        queue.add(person2, 8);
+
+        try{
+            queue.remove();
+            assertEquals("mary", queue.head().getName());
+        } catch(QueueUnderflowException e){
+            fail("Failed Test: " + e);
+        }  
+    }
+    
     /**
-     * Test of isEmpty method, of class SortedLinkedListPriorityQueue.
+     * Test of remove() method, of class SortedLinkedListPriorityQueue.
+     * Check for Exceptions
+     * @throws queuemanager.QueueUnderflowException
+     */
+    @Test(expected = QueueUnderflowException.class)
+    public void testRemoveException() throws QueueUnderflowException {
+       queue.remove();
+    }
+    
+    /**
+     * Test of isEmpty() method, of class SortedLinkedListPriorityQueue.
      */
     @Test
-    public void testIsEmpty() {
-        System.out.println("isEmpty");
-        SortedLinkedListPriorityQueue instance = new SortedLinkedListPriorityQueue();
-        boolean expResult = false;
-        boolean result = instance.isEmpty();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testIsEmpty(){
+        assertTrue(queue.isEmpty());
+        
+        queue.add(new Person("lee"), 10);
+        
+        assertFalse(queue.isEmpty());
     }
+
 
     /**
      * Test of toString method, of class SortedLinkedListPriorityQueue.
      */
     @Test
     public void testToString() {
-        System.out.println("toString");
-        SortedLinkedListPriorityQueue instance = new SortedLinkedListPriorityQueue();
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Person person1 = new Person("lee");
+        Person person2 = new Person("mary");
+        Person person3 = new Person("david");
+        
+        queue.add(person1, 10);
+        queue.add(person2, 8);
+        queue.add(person3, 12);
+        
+        String expected = "[(david, 12), (lee, 10), (mary, 8)]";
+        assertEquals(expected, queue.toString());   
     }
     
 }
