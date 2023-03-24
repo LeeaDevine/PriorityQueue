@@ -41,6 +41,22 @@ public class UnsortedLinkedListPriorityQueueTest {
         
         assertFalse(queue.isEmpty());
     }
+    
+    /**
+     * 
+     * @throws QueueOverflowException
+     * @throws QueueUnderflowException 
+     */
+    @Test
+    public void testAddSamePriority() throws QueueOverflowException, QueueUnderflowException {
+        queue.add(new Person("lee"), 5);
+        queue.add(new Person("mary"), 5);
+        
+        assertEquals("lee", queue.head().getName());
+        
+        queue.remove();
+        assertEquals("mary", queue.head().getName());
+    }
 
     /**
      * Test of head method, of class UnsortedLinkedListPriorityQueue.
@@ -88,6 +104,25 @@ public class UnsortedLinkedListPriorityQueueTest {
         }catch(QueueUnderflowException e){
             fail("Failed test: " + e);
         }
+    }
+    
+    /**
+     * 
+     * @throws QueueOverflowException
+     * @throws QueueUnderflowException 
+     */
+    @Test
+    public void testRemoveAll() throws QueueOverflowException, QueueUnderflowException {
+        queue.add(new Person("Lee"), 5);
+        queue.add(new Person("Mary"), 10);
+        queue.add(new Person("David"), 12);
+        
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        
+        assertTrue(queue.isEmpty());
+
     }
     
     @Test(expected = QueueUnderflowException.class)

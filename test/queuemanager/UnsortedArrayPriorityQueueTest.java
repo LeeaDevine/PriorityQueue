@@ -45,7 +45,7 @@ public class UnsortedArrayPriorityQueueTest {
         assertEquals(person2, queue.head()); 
     }
     
-        /**
+    /**
      * 
      * @throws QueueOverflowException
      * @throws QueueUnderflowException 
@@ -89,7 +89,7 @@ public class UnsortedArrayPriorityQueueTest {
         assertEquals(person1, queue.head());   
     }
     
-        /**
+    /**
      * 
      * @throws QueueOverflowException
      * @throws QueueUnderflowException 

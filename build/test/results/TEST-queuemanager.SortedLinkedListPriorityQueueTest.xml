@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="leedevine" name="queuemanager.SortedLinkedListPriorityQueueTest" skipped="0" tests="7" time="0.071" timestamp="2023-03-24T12:23:32">
+<testsuite errors="0" failures="0" hostname="leedevine" name="queuemanager.SortedLinkedListPriorityQueueTest" skipped="0" tests="9" time="0.072" timestamp="2023-03-24T15:13:24">
   <properties>
     <property name="libs.spring-framework300.classpath" value="C:\Program Files\NetBeans-16\netbeans\platform\modules\org-apache-commons-logging.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\cglib-2.2.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-aop-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-aspects-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-beans-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-context-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-context-support-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-core-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-expression-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-instrument-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-instrument-tomcat-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-jdbc-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-jms-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-orm-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-oxm-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-struts-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-test-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-tx-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-web-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-webmvc-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-16\netbeans\java\modules\ext\spring-3.0\spring-webmvc-portlet-3.2.18.RELEASE.jar" />
     <property name="javac.test.classpath" value="C:\Program Files\NetBeans-16\netbeans\platform\modules\ext\junit-4.13.2.jar:C:\Users\Leead\OneDrive\Documents\hamcrest-core-1.3.jar:build/classes:C:\Program Files\NetBeans-16\netbeans\platform\modules\ext\junit-4.13.2.jar:C:\Program Files\NetBeans-16\netbeans\platform\modules\ext\hamcrest-core-1.3.jar" />
@@ -18,7 +18,7 @@
     <property name="libs.jsp-compilation.src" value="" />
     <property name="libs.JWSAntTasks.javadoc" value="" />
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner queuemanager.SortedLinkedListPriorityQueueTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Leead\OneDrive\Documents\GitHub\PriorityQueue\build\test\results\TEST-queuemanager.SortedLinkedListPriorityQueueTest.xml crashfile=C:\Users\Leead\OneDrive\Documents\GitHub\PriorityQueue\build\junitvmwatcher3618759049033682678.properties propsfile=C:\Users\Leead\OneDrive\Documents\GitHub\PriorityQueue\build\junit3974826909858794665.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner queuemanager.SortedLinkedListPriorityQueueTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Leead\OneDrive\Documents\GitHub\PriorityQueue\build\test\results\TEST-queuemanager.SortedLinkedListPriorityQueueTest.xml crashfile=C:\Users\Leead\OneDrive\Documents\GitHub\PriorityQueue\build\junitvmwatcher15971153303845531507.properties propsfile=C:\Users\Leead\OneDrive\Documents\GitHub\PriorityQueue\build\junit14437700449024530069.properties" />
     <property name="jdk.debug" value="release" />
     <property name="libs.spring-framework300.src" value="" />
     <property name="javadoc.use" value="true" />
@@ -203,7 +203,7 @@
     <property name="libs.jsp-compilation-syscp.classpath" value="C:\Program Files\NetBeans-16\netbeans\extide\ant\lib\ant.jar;C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\servlet3.1-jsp2.3-api.jar;C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\glassfish-jspparser-4.0.jar;C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\jstl-impl.jar;C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\jsf-2_2\javax.faces.jar" />
     <property name="libs.jsp-compilation.classpath" value="C:\Program Files\NetBeans-16\netbeans\extide\ant\lib\ant.jar;C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\servlet3.1-jsp2.3-api.jar;C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\glassfish-jspparser-4.0.jar;C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\jsf-2_2\javax.faces.jar;C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\jstl-api.jar;C:\Program Files\NetBeans-16\netbeans\extide\ant\lib\ant-launcher.jar" />
     <property name="libs.javaee-api-6.0.classpath" value="C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\javaee-api-6.0.jar" />
-    <property name="javac.includesfile.binary" value="C:\Users\Leead\OneDrive\Documents\GitHub\PriorityQueue\null1610295606" />
+    <property name="javac.includesfile.binary" value="C:\Users\Leead\OneDrive\Documents\GitHub\PriorityQueue\null757278213" />
     <property name="libs.javaee-api-7.0.classpath" value="C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\javaee-api-7.0.jar" />
     <property name="sun.cpu.isalist" value="amd64" />
     <property name="libs.restapi.maven-pom" value="" />
@@ -423,13 +423,15 @@
     <property name="junit.forkmode" value="perTest" />
     <property name="libs.javaee-endorsed-api-6.0.classpath" value="C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\javaee6-endorsed\javax.annotation.jar;C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\javaee6-endorsed\jaxb-api-osgi.jar;C:\Program Files\NetBeans-16\netbeans\enterprise\modules\ext\javaee6-endorsed\webservices-api-osgi.jar" />
   </properties>
-  <testcase classname="queuemanager.SortedLinkedListPriorityQueueTest" name="testAdd" time="0.002" />
+  <testcase classname="queuemanager.SortedLinkedListPriorityQueueTest" name="testAddSamePriority" time="0.002" />
+  <testcase classname="queuemanager.SortedLinkedListPriorityQueueTest" name="testAdd" time="0.0" />
   <testcase classname="queuemanager.SortedLinkedListPriorityQueueTest" name="testHead" time="0.0" />
-  <testcase classname="queuemanager.SortedLinkedListPriorityQueueTest" name="testToString" time="0.003" />
+  <testcase classname="queuemanager.SortedLinkedListPriorityQueueTest" name="testToString" time="0.004" />
   <testcase classname="queuemanager.SortedLinkedListPriorityQueueTest" name="testRemoveException" time="0.001" />
   <testcase classname="queuemanager.SortedLinkedListPriorityQueueTest" name="testHeadException" time="0.0" />
   <testcase classname="queuemanager.SortedLinkedListPriorityQueueTest" name="testIsEmpty" time="0.0" />
   <testcase classname="queuemanager.SortedLinkedListPriorityQueueTest" name="testRemove" time="0.0" />
+  <testcase classname="queuemanager.SortedLinkedListPriorityQueueTest" name="testRemoveAll" time="0.0" />
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

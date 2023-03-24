@@ -44,6 +44,23 @@ public class HeapPriorityQueueTest {
     
     /**
      * 
+     * @throws QueueOverflowException
+     * @throws QueueUnderflowException 
+     */
+    @Test
+    public void testAddSamePriority() throws QueueOverflowException, QueueUnderflowException {
+        queue.add(new Person("lee"), 5);
+        queue.add(new Person("mary"), 5);
+        
+        assertEquals("lee", queue.head().getName());
+        
+        queue.remove();
+        assertEquals("mary", queue.head().getName());
+    }
+
+    
+    /**
+     * 
      * @throws QueueOverflowException 
      */
     @Test(expected = QueueOverflowException.class)
