@@ -175,18 +175,4 @@ public class UnsortedLinkedListPriorityQueue<T> implements PriorityQueue<T>{
             return result;
     }
     
-//    private Node<PriorityItem<T>> findHighestPriorityNode() throws QueueUnderflowException {
-//        if (isEmpty()) {
-//            throw new QueueUnderflowException();
-//        }
-//        Node<PriorityItem<T>> currentNode = head;
-//        Node<PriorityItem<T>> highestPriorityNode = head;
-//        while (currentNode != null) {
-//            if (currentNode.getData().getPriority() > highestPriorityNode.getData().getPriority()) {
-//                highestPriorityNode = currentNode;
-//            }
-//            currentNode = currentNode.getNextNode();
-//        }
-//        return highestPriorityNode;
-//    }
 }

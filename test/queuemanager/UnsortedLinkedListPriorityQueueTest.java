@@ -33,39 +33,66 @@ public class UnsortedLinkedListPriorityQueueTest {
      */
     @Test
     public void testAdd() {
-        System.out.println("add");
-        Object item = null;
-        int priority = 0;
-        UnsortedLinkedListPriorityQueue instance = new UnsortedLinkedListPriorityQueue();
-        instance.add(item, priority);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Person person1 = new Person("lee");
+        Person person2 = new Person("mary");
+        
+        queue.add(person1, 10);
+        queue.add(person2, 8);
+        
+        assertFalse(queue.isEmpty());
     }
 
     /**
      * Test of head method, of class UnsortedLinkedListPriorityQueue.
+     * @throws queuemanager.QueueUnderflowException
      */
     @Test
-    public void testHead() throws Exception {
-        System.out.println("head");
-        UnsortedLinkedListPriorityQueue instance = new UnsortedLinkedListPriorityQueue();
-        Object expResult = null;
-        Object result = instance.head();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testHead() throws QueueUnderflowException{
+        Person person1 = new Person("lee");
+        Person person2 = new Person("mary");
+        Person person3 = new Person("david");
+        
+        queue.add(person1, 10);
+        queue.add(person2, 8);
+        queue.add(person3, 12);
+        
+        try{
+            assertEquals("david", queue.head().getName());
+        }catch(QueueUnderflowException e){
+            fail("Failed test: " + e);
+        }
     }
 
+    @Test(expected = QueueUnderflowException.class)
+    public void testHeadException() throws QueueUnderflowException {
+        queue.head();
+    }
+    
     /**
      * Test of remove method, of class UnsortedLinkedListPriorityQueue.
+     * @throws queuemanager.QueueUnderflowException
      */
     @Test
-    public void testRemove() throws Exception {
-        System.out.println("remove");
-        UnsortedLinkedListPriorityQueue instance = new UnsortedLinkedListPriorityQueue();
-        instance.remove();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testRemove() throws QueueUnderflowException {
+        Person person1 = new Person("lee");
+        Person person2 = new Person("mary");
+        Person person3 = new Person("david");
+        
+        queue.add(person1, 10);
+        queue.add(person2, 8);
+        queue.add(person3, 12);
+        
+        try{
+            queue.remove();
+            assertEquals("lee", queue.head().getName());
+        }catch(QueueUnderflowException e){
+            fail("Failed test: " + e);
+        }
+    }
+    
+    @Test(expected = QueueUnderflowException.class)
+    public void testRemoveException() throws QueueUnderflowException {
+        queue.remove();
     }
 
     /**
@@ -73,13 +100,11 @@ public class UnsortedLinkedListPriorityQueueTest {
      */
     @Test
     public void testIsEmpty() {
-        System.out.println("isEmpty");
-        UnsortedLinkedListPriorityQueue instance = new UnsortedLinkedListPriorityQueue();
-        boolean expResult = false;
-        boolean result = instance.isEmpty();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(queue.isEmpty());
+        
+        queue.add(new Person("lee"), 10);
+        
+        assertFalse(queue.isEmpty());
     }
 
     /**
@@ -87,13 +112,16 @@ public class UnsortedLinkedListPriorityQueueTest {
      */
     @Test
     public void testToString() {
-        System.out.println("toString");
-        UnsortedLinkedListPriorityQueue instance = new UnsortedLinkedListPriorityQueue();
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Person person1 = new Person("lee");
+        Person person2 = new Person("mary");
+        Person person3 = new Person("david");
+        
+        queue.add(person1, 10);
+        queue.add(person2, 8);
+        queue.add(person3, 12);
+        
+        String expected = "[(lee, 10), (mary, 8), (david, 12)]";
+        assertEquals(expected, queue.toString());
     }
     
 }
